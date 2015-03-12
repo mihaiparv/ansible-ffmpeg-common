@@ -1,0 +1,17 @@
+---
+ffmpeg_dependencies:
+  - autoconf
+  - automake
+  - build-essential
+  - libass-dev
+  - libfreetype6-dev
+  - libgpac-dev
+  - libtheora-dev
+  - libtool
+  - libvorbis-dev
+  - pkg-config
+  - texi2html
+  - zlib1g-dev
+  - yasm
+ffmpeg_configure_prefix: "{{ '--prefix='~ffmpeg_prefix if ffmpeg_prefix is defined else '' }}"
+ffmpeg_configure_options: "{{ ffmpeg_configure_prefix }} {{ ffmpeg_configure_flags | join(' ') }}"

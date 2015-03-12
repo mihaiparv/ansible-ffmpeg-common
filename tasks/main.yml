@@ -1,0 +1,42 @@
+---
+- name: ensure the multiverse repositories are enabled
+  apt_repository: repo='{{ item }}' state=present
+  with_items:
+    - 'deb http://archive.ubuntu.com/ubuntu trusty multiverse'
+    - 'deb-src http://archive.ubuntu.com/ubuntu trusty multiverse'
+    - 'deb http://archive.ubuntu.com/ubuntu trusty-updates multiverse'
+    - 'deb-src http://archive.ubuntu.com/ubuntu trusty-updates multiverse'
+  tags: ffmpeg
+
+- name: ensure ffmpeg dependencies are installed
+  apt: state=present name={{ item }}
+  with_flattened:
+    - ffmpeg_dependencies
+    - ffmpeg_lib_dependencies
+  tags: ffmpeg
+
+- name: download the ffmpeg sources to the temporary location
+  get_url: url={{ ffmpeg_sources_url }}
+           dest=/tmp/{{ ffmpeg_sources_url | basename }}
+  tags: ffmpeg
+
+- name: unpack the ffmpeg sources
+  command: tar zxvf /tmp/{{ ffmpeg_sources_url | basename }}
+           chdir=/tmp
+           creates=/tmp/ffmpeg
+  tags: ffmpeg
+
+- name: ensure the ffmpeg package is configured
+  command: ./configure {{ ffmpeg_configure_options }}
+           chdir=/tmp/ffmpeg
+  tags: ffmpeg
+
+- name: ensure the ffmpeg package is installed
+  command: make install
+           chdir=/tmp/ffmpeg
+  tags: ffmpeg
+
+- name: ensure the ffmpeg installation files are cleaned-up
+  command: make distclean
+           chdir=/tmp/ffmpeg
+  tags: ffmpeg

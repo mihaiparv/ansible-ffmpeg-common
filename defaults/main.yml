@@ -1,0 +1,22 @@
+---
+ffmpeg_sources_url: 'http://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2'
+ffmpeg_lib_dependencies:
+  - libfdk-aac-dev
+  - libmp3lame-dev
+  - libopus-dev
+  - libthoera-dev
+  - libvorbis-dev
+  - libvpx-dev
+  - libx264-dev
+ffmpeg_configure_flags:
+  - '--enable-gpl'
+  - '--enable-libass'
+  - '--enable-libfdk-aac'
+  - '--enable-libfreetype'
+  - '--enable-libmp3lame'
+  - '--enable-libopus'
+  - '--enable-libtheora'
+  - '--enable-libvorbis'
+  - '--enable-libvpx'
+  - '--enable-libx264'
+  - '--enable-nonfree'
