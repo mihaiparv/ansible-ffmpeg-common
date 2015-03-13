@@ -4,7 +4,7 @@ ffmpeg_lib_dependencies:
   - libfdk-aac-dev
   - libmp3lame-dev
   - libopus-dev
-  - libthoera-dev
+  - libtheora-dev
   - libvorbis-dev
   - libvpx-dev
   - libx264-dev
