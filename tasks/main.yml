@@ -21,9 +21,11 @@
   tags: ffmpeg
 
 - name: unpack the ffmpeg sources
-  command: tar zxvf /tmp/{{ ffmpeg_sources_url | basename }}
-           chdir=/tmp
-           creates=/tmp/ffmpeg
+  unarchive:
+    src: /tmp/{{ ffmpeg_sources_url | basename }}
+    dest: /tmp
+    copy: no
+    creates: /tmp/ffmpeg
   tags: ffmpeg
 
 - name: ensure the ffmpeg package is configured
